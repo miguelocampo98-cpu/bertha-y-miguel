@@ -819,6 +819,80 @@
     z-index: 100;
   }
 
+  /* ── CONFIRMATION POPUP ── */
+  .confirm-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    animation: fadeIn 0.3s ease both;
+  }
+  .confirm-overlay.visible { display: flex; }
+
+  .confirm-popup {
+    background: #111;
+    border: 1px solid rgba(201,185,154,0.25);
+    max-width: 420px;
+    width: 100%;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .confirm-popup .check-circle {
+    width: 64px;
+    height: 64px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.6rem;
+    color: var(--accent);
+  }
+
+  .confirm-popup h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2rem;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+
+  .confirm-popup p {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+    margin-bottom: 2rem;
+  }
+
+  .confirm-popup .close-btn {
+    padding: 0.9rem 2.5rem;
+    background: transparent;
+    border: 1px solid rgba(201,185,154,0.4);
+    color: var(--accent);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .confirm-popup .close-btn:hover {
+    background: rgba(201,185,154,0.08);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
   .nav-admin-btn {
     width: 44px;
     height: 44px;
@@ -1327,6 +1401,16 @@
   <button class="nav-admin-btn" id="adminBtn" title="Panel de administración — o presiona Alt+A">⚙</button>
 </div>
 
+<!-- CONFIRMATION POPUP -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-popup">
+    <div class="check-circle">✓</div>
+    <h2 id="popupTitle">¡Gracias!</h2>
+    <p id="popupText">Tu confirmación ha sido recibida.<br>Te enviamos un correo con todos los detalles.</p>
+    <button class="close-btn" onclick="closePopup()">Cerrar</button>
+  </div>
+</div>
+
 <script>
 // ── STORAGE HELPER (safe localStorage) ──
 const store = {
@@ -1625,9 +1709,24 @@ async function submitRSVP() {
   document.getElementById('rsvpForm').style.display = 'none';
   const msg = document.getElementById('successMsg');
   msg.classList.add('visible');
+
+  // Show confirmation popup
+  const overlay = document.getElementById('confirmOverlay');
   if (asistencia === 'No') {
+    document.getElementById('popupTitle').textContent = '¡Gracias!';
+    document.getElementById('popupText').innerHTML = 'Lástima que no puedas acompañarnos,<br>¡pero te llevamos en el corazón! 💛';
     document.getElementById('successText').textContent = 'Lástima que no puedas acompañarnos, ¡pero te llevaremos en el corazón! 💛';
   }
+  overlay.classList.add('visible');
+  // Close on click outside
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closePopup();
+  });
+}
+
+// ── CONFIRMATION POPUP ──
+function closePopup() {
+  document.getElementById('confirmOverlay').classList.remove('visible');
 }
 
 // ── RENDER RESPONSES ──
