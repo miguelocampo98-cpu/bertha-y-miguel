@@ -1060,6 +1060,14 @@
           <label class="checkbox-item"><input type="checkbox" class="rest-check" id="rest-ninguna" value="Ninguna" onchange="restriccionChange(this)"> <span>Ninguna</span></label>
         </div>
       </div><!-- /restricciones -->
+
+      <!-- Correo -->
+      <div class="form-group" id="correo-group" style="display:none">
+        <label class="form-label">Tu correo electrónico</label>
+        <input type="email" class="form-input" id="correoInput" placeholder="nombre@correo.com">
+        <p style="font-size:0.7rem;color:var(--gray);margin-top:0.4rem;letter-spacing:0.04em">Te enviaremos una confirmación con todos los detalles de la boda.</p>
+      </div>
+
       </div><!-- /asistencia-group -->
 
       <button class="submit-btn" id="submitBtn" onclick="submitRSVP()"><span>Confirmar asistencia</span></button>
@@ -1330,7 +1338,7 @@ const store = {
 // ── STATE ──
 let responses = store.getJson('bm_responses', []);
 let waContacts = store.getJson('bm_contacts', []);
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwKRHWaNR87ijFLjy9bxOyLLiBfDpIEb8yNikAO6zEAbZEj9czlkNi6sj0iShEgi4xw/exec';
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzX6Uog-4hToOmRq0UYCQUCNo_IjlCEvSBapP82bSd9IlwdvalcW1q3be4Fx9c7iAI1/exec';
 const EVITE_URL = 'https://bertha-y-miguel.netlify.app/';
 
 let sheetsUrl = store.get('bm_sheets_url', SHEETS_URL);
@@ -1530,6 +1538,7 @@ function selectToggle(btn, fieldId, value) {
     }
     document.getElementById('bebidas-group').style.display = asiste ? 'block' : 'none';
     document.getElementById('restricciones-group').style.display = asiste ? 'block' : 'none';
+    document.getElementById('correo-group').style.display = 'block';
   }
 }
 
@@ -1577,11 +1586,14 @@ async function submitRSVP() {
     alert('Por favor indica si tienes restricciones alimentarias'); return;
   }
 
+  const correo = document.getElementById('correoInput').value.trim();
+
   const entry = {
     id: Date.now(),
     fecha: new Date().toLocaleString('es-MX'),
     nombre,
     telefono,
+    correo,
     asistencia,
     masUno: document.getElementById('masUno').value || '—',
     nombreMasUno: document.getElementById('nombreMasUno').value.trim() || '—',
