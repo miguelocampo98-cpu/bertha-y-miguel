@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bertha & Miguel — 10.10.2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Dancing+Script:wght@400;600&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f3f0;
+    --cream: #ede9e3;
+    --gray: #8a8680;
+    --mid: #3a3836;
+    --accent: #c9b99a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 60% 40%, rgba(201,185,154,0.08) 0%, transparent 60%),
+      linear-gradient(180deg, #0a0a0a 0%, #1a1815 40%, #0a0a0a 100%);
+  }
+
+  /* Animated grain overlay */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  /* Decorative horizontal lines */
+  .hero-line-top, .hero-line-bottom {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.3;
+  }
+  .hero-line-top { top: 12%; }
+  .hero-line-bottom { bottom: 12%; }
+
+  /* Sport icons decorative */
+  .sport-deco {
+    position: absolute;
+    bottom: 13%;
+    opacity: 0.06;
+    pointer-events: none;
+    animation: fadeUp 1.4s ease 1.8s both;
+  }
+  .sport-deco.runner { left: 5%; width: 90px; }
+  .sport-deco.cyclist { right: 5%; width: 180px; transform: scaleX(-1); }
+
+  @media (max-width: 600px) {
+    .sport-deco.runner { width: 55px; left: 1%; }
+    .sport-deco.cyclist { width: 110px; right: 1%; }
+  }
+
+  /* Sport tags below names */
+  .hero-sports {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 1rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.0s both;
+  }
+  .sport-tag {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+  .sport-dot {
+    width: 3px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    animation: fadeUp 1.4s ease both;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+
+  .hero-names {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 400;
+    font-size: clamp(4rem, 12vw, 8rem);
+    line-height: 1;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s both;
+  }
+
+  .hero-ampersand {
+    color: var(--accent);
+    display: block;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin: 0.2em 0;
+    font-style: italic;
+  }
+
+  .hero-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    color: var(--cream);
+    margin-top: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s both;
+  }
+
+  .hero-location {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--gray);
+    margin-top: 0.6rem;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.1s both;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 6%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.6s both;
+    cursor: pointer;
+  }
+
+  .scroll-hint span {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+
+  .scroll-hint-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(180deg, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ── DETAILS SECTION ── */
+  .section {
+    padding: 6rem 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0.3;
+  }
+
+  .details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem 2rem;
+  }
+
+  @media (max-width: 500px) {
+    .details-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  .detail-item h3 {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .detail-item p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.4;
+  }
+
+  .detail-item p small {
+    display: block;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 200;
+    color: var(--gray);
+    letter-spacing: 0.1em;
+    margin-top: 0.3rem;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.3;
+  }
+
+  .divider-line { flex: 1; height: 1px; background: var(--accent); }
+
+  .divider-bike {
+    font-size: 1.2rem;
+    opacity: 0.8;
+  }
+
+  /* ── RSVP FORM ── */
+  .rsvp-section {
+    padding: 5rem 2rem 8rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .rsvp-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .rsvp-subtitle {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    color: var(--gray);
+    margin-bottom: 3rem;
+  }
+
+  .form-group {
+    margin-bottom: 2rem;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,185,154,0.2);
+    color: var(--white);
+    padding: 1rem 1.2rem;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    transition: border-color 0.3s, background 0.3s;
+    outline: none;
+    border-radius: 0;
+    appearance: none;
+  }
+
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--accent);
+    background: rgba(201,185,154,0.06);
+  }
+
+  .form-input::placeholder, .form-textarea::placeholder {
+    color: rgba(255,255,255,0.2);
+  }
+
+  .form-select option {
+    background: #1a1815;
+    color: var(--white);
+  }
+
+  .form-textarea { resize: vertical; min-height: 100px; }
+
+  /* Toggle buttons for yes/no */
+  .toggle-group {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .toggle-btn {
+    flex: 1;
+    padding: 1rem;
+    background: transparent;
+    border: 1px solid rgba(201,185,154,0.2);
+    color: var(--gray);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .toggle-btn:hover {
+    border-color: var(--accent);
+    color: var(--white);
+  }
+
+  .toggle-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--black);
+    font-weight: 400;
+  }
+
+  /* Checkbox group */
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    cursor: pointer;
+  }
+
+  .checkbox-item input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid rgba(201,185,154,0.3);
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+
+  .checkbox-item input[type="checkbox"]:checked {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .checkbox-item input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--black);
+    font-size: 11px;
+    font-weight: bold;
+  }
+
+  .checkbox-item label {
+    font-size: 0.9rem;
+    color: var(--cream);
+    cursor: pointer;
+    letter-spacing: 0.05em;
+  }
+
+  /* Hidden field shown conditionally */
+  .conditional-field {
+    display: none;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(201,185,154,0.1);
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .conditional-field.visible { display: block; }
+
+  /* Submit */
+  .submit-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .submit-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+    z-index: 0;
+  }
+
+  .submit-btn:hover::before { transform: translateX(0); }
+
+  .submit-btn:hover {
+    color: var(--black);
+  }
+
+  .submit-btn span { position: relative; z-index: 1; }
+
+  /* Success message */
+  .success-message {
+    display: none;
+    text-align: center;
+    padding: 3rem 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .success-message.visible { display: block; }
+
+  .success-message .check-icon {
+    width: 60px;
+    height: 60px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.5rem;
+    color: var(--accent);
+  }
+
+  .success-message h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2rem;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+
+  .success-message p {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 0.85rem;
+    color: var(--gray);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(201,185,154,0.1);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2rem;
+    color: var(--gray);
+  }
+
+  /* ── WHATSAPP SENDER ── */
+  .wa-section {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(201,185,154,0.1);
+    padding: 3rem 2rem;
+    max-width: 700px;
+    margin: 0 auto 4rem;
+  }
+
+  .wa-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+  }
+
+  .wa-section p {
+    font-size: 0.8rem;
+    color: var(--gray);
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+  }
+
+  .wa-contacts-area {
+    width: 100%;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(201,185,154,0.15);
+    color: var(--white);
+    padding: 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    min-height: 160px;
+    resize: vertical;
+    outline: none;
+    letter-spacing: 0.02em;
+    line-height: 1.8;
+    transition: border-color 0.3s;
+  }
+
+  .wa-contacts-area:focus { border-color: var(--accent); }
+
+  .wa-contacts-area::placeholder { color: rgba(255,255,255,0.2); }
+
+  .wa-hint {
+    font-size: 0.7rem;
+    color: var(--gray);
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .wa-message-preview {
+    background: rgba(37,211,102,0.05);
+    border: 1px solid rgba(37,211,102,0.15);
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+  }
+
+  .wa-message-preview strong {
+    display: block;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(37,211,102,0.5);
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+  }
+
+  .wa-contacts-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    min-height: 40px;
+  }
+
+  .wa-tag {
+    background: rgba(201,185,154,0.1);
+    border: 1px solid rgba(201,185,154,0.25);
+    padding: 0.3rem 0.8rem;
+    font-size: 0.75rem;
+    color: var(--cream);
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .wa-tag .wa-tag-remove {
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    font-size: 0.9rem;
+    line-height: 1;
+  }
+
+  .wa-tag .wa-tag-remove:hover { opacity: 1; }
+
+  .wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: transparent;
+    border: 1px solid rgba(37,211,102,0.4);
+    color: rgba(37,211,102,0.8);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+
+  .wa-btn:hover {
+    background: rgba(37,211,102,0.08);
+    border-color: rgba(37,211,102,0.7);
+    color: rgba(37,211,102,1);
+  }
+
+  .wa-btn svg { width: 18px; height: 18px; }
+
+  .wa-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .wa-counter {
+    font-size: 0.7rem;
+    color: var(--gray);
+    letter-spacing: 0.1em;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(201,185,154,0.1);
+    margin-bottom: 4rem;
+  }
+
+  .tab-btn {
+    padding: 1rem 2rem;
+    background: transparent;
+    border: none;
+    color: var(--gray);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .tab-btn.active { color: var(--accent); }
+  .tab-btn.active::after { transform: scaleX(1); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Admin panel */
+  .admin-note {
+    background: rgba(201,185,154,0.05);
+    border-left: 2px solid var(--accent);
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.8rem;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+
+  .admin-note a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .admin-note a:hover { text-decoration: underline; }
+
+  .sheets-config {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .sheets-url-display {
+    background: rgba(0,0,0,0.4);
+    padding: 1rem;
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    word-break: break-all;
+    border: 1px solid rgba(201,185,154,0.15);
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* ── RESPONSES TABLE ── */
+  .responses-table-wrap { overflow-x: auto; }
+
+  .responses-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+
+  .responses-table th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 1px solid rgba(201,185,154,0.15);
+    white-space: nowrap;
+  }
+
+  .responses-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--cream);
+    white-space: nowrap;
+  }
+
+  .responses-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .badge {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    border-radius: 0;
+  }
+
+  .badge-yes { background: rgba(37,211,102,0.12); color: #5fd88a; border: 1px solid rgba(37,211,102,0.25); }
+  .badge-no  { background: rgba(255,80,80,0.1); color: #f08080; border: 1px solid rgba(255,80,80,0.2); }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--gray);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* Page switcher — controlled via JS style.display */
+  #adminPage { display: none; }
+
+  .nav-admin {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 100;
+  }
+
+  .nav-admin-btn {
+    width: 44px;
+    height: 44px;
+    background: var(--mid);
+    border: 1px solid rgba(201,185,154,0.2);
+    color: var(--gray);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    border-radius: 0;
+  }
+
+  .nav-admin-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .section, .rsvp-section { padding: 4rem 1.5rem; }
+    .wa-section { padding: 2rem 1.5rem; }
+    .tabs { overflow-x: auto; }
+    .tab-btn { padding: 0.75rem 1.25rem; font-size: 0.65rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- GUEST PAGE -->
+<div id="guestPage" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-line-top"></div>
+    <div class="hero-line-bottom"></div>
+
+    <!-- Runner (Bertha) — left, clean geometric like the bike -->
+    <svg class="sport-deco runner" viewBox="0 0 80 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- head -->
+      <circle cx="52" cy="18" r="10" stroke="white" stroke-width="2.5"/>
+      <!-- ponytail -->
+      <path d="M57 10 Q70 4 68 14 Q66 20 60 18" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <!-- torso angled forward -->
+      <line x1="52" y1="28" x2="40" y2="68" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- arm back (right) -->
+      <line x1="49" y1="42" x2="66" y2="55" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- arm forward (left) — bent at elbow -->
+      <line x1="46" y1="40" x2="30" y2="50" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="30" y1="50" x2="26" y2="40" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- leg forward — knee high -->
+      <line x1="40" y1="68" x2="24" y2="90" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="24" y1="90" x2="32" y2="115" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- leg back — extended behind, heel kick -->
+      <line x1="40" y1="68" x2="58" y2="95" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="58" y1="95" x2="52" y2="120" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="52" y1="120" x2="44" y2="128" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+
+    <!-- Cyclist (Miguel) — right -->
+    <svg class="sport-deco cyclist" viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="45" cy="90" r="34" stroke="white" stroke-width="2.5"/>
+      <circle cx="155" cy="90" r="34" stroke="white" stroke-width="2.5"/>
+      <!-- frame -->
+      <path d="M45 90 L85 45 L125 90" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M85 45 L105 22 L125 45" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <line x1="125" y1="90" x2="155" y2="90" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="85" y1="45" x2="125" y2="90" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- rider head -->
+      <circle cx="108" cy="18" r="8" stroke="white" stroke-width="2.5"/>
+      <!-- rider body -->
+      <path d="M108 26 Q102 38 85 45" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </svg>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Los invitamos a celebrar</p>
+      <h1 class="hero-names">
+        Bertha
+        <span class="hero-ampersand">&amp;</span>
+        Miguel
+      </h1>
+      <p class="hero-date">10 · 10 · 2026</p>
+      <p class="hero-location">Cuernavaca, Morelos, México</p>
+    </div>
+
+    <div class="scroll-hint" onclick="document.getElementById('details').scrollIntoView({behavior:'smooth'})">
+      <span>Ver detalles</span>
+      <div class="scroll-hint-line"></div>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section class="section" id="details">
+    <div class="section-label">La celebración</div>
+    <div class="details-grid">
+      <div class="detail-item">
+        <h3>Fecha</h3>
+        <p>Sábado 10 de octubre de 2026</p>
+      </div>
+      <div class="detail-item">
+        <h3>Lugar</h3>
+        <p>Jardín "El Encanto"
+          <small>Cuernavaca, Morelos, México</small>
+          <small>Calle Coronel Ahumada 42, Los Volcanes, 62350</small>
+          <a href="https://maps.app.goo.gl/qSLQtepEKbuUD8sS9" target="_blank" style="display:inline-block;margin-top:0.5rem;font-family:'Jost',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(201,185,154,0.3);padding-bottom:0.1rem">Ver en Google Maps →</a>
+        </p>
+      </div>
+      <div class="detail-item">
+        <h3>Hora</h3>
+        <p>2:00 pm<small>Ceremonia y recepción en jardín</small></p>
+      </div>
+      <div class="detail-item" style="grid-column: 1 / -1">
+        <h3>Código de vestimenta</h3>
+        <p style="font-size:1rem;line-height:1.8">
+          <span style="font-style:italic;color:var(--accent);display:block;margin-bottom:1rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem">"Garden Formal"</span>
+          <span style="color:var(--accent);font-family:'Jost',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;display:block;margin-bottom:0.4rem">Hombres</span>
+          Traje ligero (lino, algodón o mezclas de verano), camisa de vestir y zapatos de piel. Corbata opcional.
+          <small style="color:var(--gray);margin-top:0.4rem;display:block">Evitar traje negro y guayaberas.</small>
+        </p>
+        <p style="font-size:1rem;line-height:1.8;margin-top:1.2rem">
+          <span style="color:var(--accent);font-family:'Jost',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;display:block;margin-bottom:0.4rem">Mujeres</span>
+          Vestido tipo cóctel, midi o largo en telas ligeras.
+        </p>
+        <p style="font-size:0.8rem;color:var(--gray);margin-top:1rem;font-style:italic">La ceremonia y recepción serán en jardín.</p>
+      </div>
+    </div>
+  </section>
+    <svg width="12" height="22" viewBox="0 0 80 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.5">
+      <circle cx="52" cy="18" r="10" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+      <line x1="52" y1="28" x2="40" y2="68" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+      <line x1="49" y1="42" x2="66" y2="55" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+      <line x1="46" y1="40" x2="30" y2="50" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+      <line x1="30" y1="50" x2="26" y2="40" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+      <line x1="40" y1="68" x2="24" y2="90" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+      <line x1="24" y1="90" x2="32" y2="115" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+      <line x1="40" y1="68" x2="58" y2="95" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+      <line x1="58" y1="95" x2="52" y2="120" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+      <line x1="52" y1="120" x2="44" y2="128" stroke="#c9b99a" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    <div class="divider-line"></div>
+    <!-- cyclist icon -->
+    <svg width="32" height="20" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.5">
+      <circle cx="45" cy="80" r="35" stroke="#c9b99a" stroke-width="6"/>
+      <circle cx="155" cy="80" r="35" stroke="#c9b99a" stroke-width="6"/>
+      <path d="M45 80 L90 35 L130 80" stroke="#c9b99a" stroke-width="6" fill="none"/>
+      <path d="M90 35 L110 10 L130 35" stroke="#c9b99a" stroke-width="6" fill="none"/>
+      <path d="M130 80 L155 80" stroke="#c9b99a" stroke-width="6"/>
+      <path d="M90 35 L130 80" stroke="#c9b99a" stroke-width="6"/>
+    </svg>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- RSVP FORM -->
+  <section class="rsvp-section" id="rsvp">
+    <div class="section-label">Confirmación</div>
+    <h2 class="rsvp-title">RSVP</h2>
+    <p class="rsvp-subtitle">Por favor confírmanos tu asistencia antes del 1 de septiembre de 2026</p>
+
+    <div id="rsvpForm">
+      <!-- Identificación por nombre -->
+      <div class="form-group">
+        <label class="form-label">Tu nombre</label>
+        <div style="display:flex;gap:0.75rem">
+          <input type="text" class="form-input" id="telefono" placeholder="Escribe tu nombre" required style="flex:1" oninput="onPhoneInput()" onkeydown="if(event.key==='Enter') lookupGuest()">
+          <button onclick="lookupGuest()" style="padding:1rem 1.5rem;background:transparent;border:1px solid rgba(201,185,154,0.3);color:var(--accent);font-family:'Jost',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:all 0.3s" onmouseover="this.style.background='rgba(201,185,154,0.08)'" onmouseout="this.style.background='transparent'">Buscar →</button>
+        </div>
+        <p style="font-size:0.7rem;color:var(--gray);margin-top:0.5rem;letter-spacing:0.05em">Escribe tu nombre tal como te registramos.</p>
+        <!-- Suggestions list -->
+        <div id="phoneSuggestions" style="display:none;margin-top:0.5rem;border:1px solid rgba(201,185,154,0.2);background:#111"></div>
+      </div>
+      <div id="nombreDisplay" style="display:none" class="form-group">
+        <label class="form-label">Confirmando para</label>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--white)" id="nombreLabel"></p>
+      </div>
+
+      <!-- Asistencia (se muestra tras lookup) -->
+      <div id="asistencia-group" style="display:none">
+      <div class="form-group">
+        <label class="form-label">¿Confirmas tu asistencia?</label>
+        <div class="toggle-group">
+          <button class="toggle-btn" onclick="selectToggle(this, 'asistencia', 'Sí')">Sí, ahí estaré</button>
+          <button class="toggle-btn" onclick="selectToggle(this, 'asistencia', 'No')">No podré asistir</button>
+        </div>
+        <input type="hidden" id="asistencia" value="">
+      </div>
+
+      <!-- +1 — siempre visible si tienen permiso -->
+      <div class="form-group" id="mas-uno-group" style="display:none">
+        <label class="form-label">¿Vienes con acompañante?</label>
+        <p style="font-size:0.72rem;color:var(--gray);margin-bottom:0.75rem;letter-spacing:0.04em">Se te ha asignado un lugar para +1.</p>
+        <div class="toggle-group">
+          <button class="toggle-btn" onclick="selectToggle(this, 'masUno', 'Sí'); showMasUnoName(true)">Sí, vengo con +1</button>
+          <button class="toggle-btn" onclick="selectToggle(this, 'masUno', 'No'); showMasUnoName(false)">Vendré solo/a</button>
+        </div>
+        <input type="hidden" id="masUno" value="">
+        <div class="conditional-field" id="masUnoName">
+          <label class="form-label">Nombre de tu acompañante</label>
+          <input type="text" class="form-input" id="nombreMasUno" placeholder="Nombre completo">
+        </div>
+      </div>
+
+      <!-- Bebidas -->
+      <div class="form-group" id="bebidas-group" style="display:none">
+        <label class="form-label">¿Qué te gustaría tomar? <span style="color:var(--gray);font-size:0.65rem;letter-spacing:0.1em">(puedes escoger varias)</span></label>
+        <div class="checkbox-group" style="margin-bottom:0.75rem">
+          <label class="checkbox-item"><input type="checkbox" class="beb-check" value="Vino"> <span>Vino</span></label>
+          <label class="checkbox-item"><input type="checkbox" class="beb-check" value="Cerveza"> <span>Cerveza</span></label>
+          <label class="checkbox-item"><input type="checkbox" class="beb-check" value="Tequila"> <span>Tequila</span></label>
+          <label class="checkbox-item"><input type="checkbox" class="beb-check" value="Mezcal"> <span>Mezcal</span></label>
+          <label class="checkbox-item"><input type="checkbox" class="beb-check" value="Whiskey"> <span>Whiskey</span></label>
+          <label class="checkbox-item"><input type="checkbox" class="beb-check" value="Ginebra"> <span>Ginebra</span></label>
+          <label class="checkbox-item"><input type="checkbox" class="beb-check" value="Vodka"> <span>Vodka</span></label>
+          <label class="checkbox-item"><input type="checkbox" class="beb-check" value="Ron"> <span>Ron</span></label>
+          <label class="checkbox-item"><input type="checkbox" class="beb-check" value="Aguardiente"> <span>Aguardiente</span></label>
+          <label class="checkbox-item"><input type="checkbox" class="beb-check" id="beb-otro-check" value="Otro" onchange="document.getElementById('beb-otro-txt').style.display=this.checked?'block':'none'"> <span>Otro</span></label>
+        </div>
+        <input type="text" class="form-input" id="beb-otro-txt" placeholder="¿Cuál?" style="display:none;margin-top:0.5rem">
+      </div>
+
+      <!-- Restricciones -->
+      <div class="form-group" id="restricciones-group" style="display:none">
+        <label class="form-label">¿Alguna restricción alimentaria?</label>
+        <div class="checkbox-group" style="margin-bottom:0.75rem">
+          <label class="checkbox-item"><input type="checkbox" class="rest-check" id="rest-veg-yo" value="Soy vegetariano/a" onchange="restriccionChange(this)"> <span>Soy vegetariano/a</span></label>
+          <label class="checkbox-item"><input type="checkbox" class="rest-check" id="rest-veg-pareja" value="Mi pareja es vegetariana" onchange="restriccionChange(this)"> <span>Mi pareja es vegetariana</span></label>
+          <label class="checkbox-item">
+            <input type="checkbox" class="rest-check" id="rest-alergia-yo" value="Tengo alergia" onchange="restriccionChange(this); document.getElementById('rest-alergia-yo-txt').style.display=this.checked?'block':'none'">
+            <span>Tengo alguna alergia</span>
+          </label>
+          <input type="text" class="form-input" id="rest-alergia-yo-txt" placeholder="¿A qué?" style="display:none;margin-top:0.5rem;margin-left:1.8rem">
+          <label class="checkbox-item">
+            <input type="checkbox" class="rest-check" id="rest-alergia-pareja" value="Mi pareja tiene alergia" onchange="restriccionChange(this); document.getElementById('rest-alergia-pareja-txt').style.display=this.checked?'block':'none'">
+            <span>Mi pareja tiene alguna alergia</span>
+          </label>
+          <input type="text" class="form-input" id="rest-alergia-pareja-txt" placeholder="¿A qué?" style="display:none;margin-top:0.5rem;margin-left:1.8rem">
+          <label class="checkbox-item"><input type="checkbox" class="rest-check" id="rest-ninguna" value="Ninguna" onchange="restriccionChange(this)"> <span>Ninguna</span></label>
+        </div>
+      </div><!-- /restricciones -->
+      </div><!-- /asistencia-group -->
+
+      <button class="submit-btn" id="submitBtn" onclick="submitRSVP()"><span>Confirmar asistencia</span></button>
+    </div>
+
+    <div class="success-message" id="successMsg">
+      <div class="check-icon">✓</div>
+      <h3>¡Gracias!</h3>
+      <p id="successText">Tu confirmación ha sido recibida.<br>Nos vemos en la boda 🏃🏻‍♀️🚴🏻‍♂️🥂🎊</p>
+    </div>
+  </section>
+
+  <!-- REGALO -->
+  <section class="section" id="regalo" style="padding-top:0">
+    <div class="divider" style="margin-bottom:4rem;padding:0">
+      <div class="divider-line"></div>
+      <svg width="12" height="22" viewBox="0 0 80 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.25">
+        <circle cx="52" cy="18" r="10" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+        <line x1="52" y1="28" x2="40" y2="68" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+        <line x1="49" y1="42" x2="66" y2="55" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+        <line x1="46" y1="40" x2="30" y2="50" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+        <line x1="30" y1="50" x2="26" y2="40" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+        <line x1="40" y1="68" x2="24" y2="90" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+        <line x1="24" y1="90" x2="32" y2="115" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+        <line x1="40" y1="68" x2="58" y2="95" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+        <line x1="58" y1="95" x2="52" y2="120" stroke="#c9b99a" stroke-width="4" stroke-linecap="round"/>
+        <line x1="52" y1="120" x2="44" y2="128" stroke="#c9b99a" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <div class="divider-line"></div>
+      <svg width="32" height="20" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.25">
+        <circle cx="45" cy="80" r="35" stroke="#c9b99a" stroke-width="6"/>
+        <circle cx="155" cy="80" r="35" stroke="#c9b99a" stroke-width="6"/>
+        <path d="M45 80 L90 35 L130 80" stroke="#c9b99a" stroke-width="6" fill="none"/>
+        <path d="M90 35 L110 10 L130 35" stroke="#c9b99a" stroke-width="6" fill="none"/>
+        <path d="M130 80 L155 80" stroke="#c9b99a" stroke-width="6"/>
+        <path d="M90 35 L130 80" stroke="#c9b99a" stroke-width="6"/>
+      </svg>
+      <div class="divider-line"></div>
+    </div>
+    <div class="section-label">Mesa de regalos</div>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:var(--white);margin-bottom:0.75rem;line-height:1.5">
+      Tu regalo más valioso<br>es tu presencia.
+    </p>
+    <p style="font-size:0.85rem;color:var(--gray);line-height:1.8;font-weight:200;max-width:480px">
+      Si deseas hacernos un regalo, hemos preparado una página donde puedes contribuir a nuestra luna de miel. ¡Próximamente compartiremos el enlace!
+    </p>
+    <div style="margin-top:1.5rem;padding:1rem 1.5rem;border:1px solid rgba(201,185,154,0.15);display:inline-block">
+      <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent)">Próximamente 🌙</p>
+    </div>
+  </section>
+
+  <!-- LOGÍSTICA -->
+  <section class="section" id="logistica" style="padding-top:0">
+    <div class="divider" style="margin-bottom:4rem;padding:0">
+      <div class="divider-line"></div>
+      <div class="divider-line"></div>
+    </div>
+    <div class="section-label">Información práctica</div>
+
+    <div style="display:flex;flex-direction:column;gap:2.5rem">
+
+      <div>
+        <h3 style="font-family:'Jost',sans-serif;font-weight:200;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem">Dónde quedarse</h3>
+        <p style="font-size:0.9rem;color:var(--cream);line-height:1.8;font-family:'Cormorant Garamond',serif">Cuernavaca tiene una gran oferta de hoteles y Airbnb cerca del jardín. Te recomendamos hacer tu reserva con tiempo — próximamente compartiremos una lista de opciones recomendadas.</p>
+      </div>
+
+      <div>
+        <h3 style="font-family:'Jost',sans-serif;font-weight:200;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem">Cómo llegar</h3>
+        <p style="font-size:0.9rem;color:var(--cream);line-height:1.8;font-family:'Cormorant Garamond',serif">
+          Te sugerimos llegar el viernes a Ciudad de México y salir directo a Cuernavaca.<br><br>
+          <span style="color:var(--accent);font-size:0.75rem;font-family:'Jost',sans-serif;letter-spacing:0.1em">Desde el AICM</span> — aproximadamente 1.5 horas en coche por la autopista México–Cuernavaca.<br>
+          <span style="color:var(--accent);font-size:0.75rem;font-family:'Jost',sans-serif;letter-spacing:0.1em">Desde el AIFA</span> — aproximadamente 2.5 horas en coche.<br><br>
+          Puedes rentar un coche directamente en el aeropuerto. También hay autobuses desde el AICM con salida directa a Cuernavaca — próximamente compartiremos los detalles de dónde abordar.
+        </p>
+      </div>
+
+      <div>
+        <h3 style="font-family:'Jost',sans-serif;font-weight:200;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem">En Cuernavaca</h3>
+        <p style="font-size:0.9rem;color:var(--cream);line-height:1.8;font-family:'Cormorant Garamond',serif">
+          Uber está disponible las 24 horas en Cuernavaca, por lo que moverse entre tu hospedaje y el jardín es muy sencillo.<br><br>
+          El jardín cuenta con <strong style="color:var(--white)">valet parking sin costo</strong>.<br><br>
+          Te recomendamos traer algo de efectivo para casetas de peaje y propinas.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>Bertha &amp; Miguel — 10.10.2026</p>
+    <p style="font-size:0.7rem;letter-spacing:0.2em;color:var(--gray);margin-top:0.5rem;font-family:'Jost',sans-serif;font-weight:200">🏃🏻‍♀️ &nbsp;·&nbsp; 🚴🏻‍♂️</p>
+  </footer>
+
+</div><!-- /guestPage -->
+
+
+<!-- ADMIN PAGE -->
+<div id="adminPage" class="page">
+  <div style="padding: 3rem 2rem; max-width: 900px; margin: 0 auto;">
+
+    <div style="margin-bottom:3rem">
+      <p style="font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem">Panel de administración</p>
+      <h1 style="font-family:'Dancing Script',cursive;font-size:2.5rem">Bertha &amp; Miguel</h1>
+      <p style="font-size:0.8rem;color:var(--gray);margin-top:0.3rem">Gestión de invitados · 10.10.2026</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('respuestas')">Respuestas</button>
+      <button class="tab-btn" onclick="switchTab('whatsapp')">Enviar WhatsApp</button>
+      <button class="tab-btn" onclick="switchTab('configuracion')">Configuración</button>
+    </div>
+
+    <!-- TAB: RESPUESTAS -->
+    <div class="tab-panel active" id="tab-respuestas">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem">
+        <div>
+          <span id="totalCount" style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--white)">0</span>
+          <span style="font-size:0.7rem;letter-spacing:0.2em;color:var(--gray);margin-left:0.5rem">respuestas</span>
+          <span style="margin:0 1rem;color:var(--mid)">|</span>
+          <span id="siCount" style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#5fd88a">0</span>
+          <span style="font-size:0.65rem;letter-spacing:0.15em;color:var(--gray);margin-left:0.3rem">asisten</span>
+          <span style="margin:0 0.75rem;color:var(--mid)">·</span>
+          <span id="noCount" style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#f08080">0</span>
+          <span style="font-size:0.65rem;letter-spacing:0.15em;color:var(--gray);margin-left:0.3rem">no asisten</span>
+        </div>
+        <div style="display:flex;gap:0.75rem">
+          <button onclick="exportCSV()" style="padding:0.6rem 1.2rem;background:transparent;border:1px solid rgba(201,185,154,0.3);color:var(--accent);font-family:'Jost',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:all 0.3s" onmouseover="this.style.background='rgba(201,185,154,0.08)'" onmouseout="this.style.background='transparent'">
+            Exportar CSV
+          </button>
+          <button onclick="clearResponses()" style="padding:0.6rem 1.2rem;background:transparent;border:1px solid rgba(255,80,80,0.2);color:#f08080;font-family:'Jost',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:all 0.3s" onmouseover="this.style.background='rgba(255,80,80,0.05)'" onmouseout="this.style.background='transparent'">
+            Limpiar
+          </button>
+        </div>
+      </div>
+
+      <div class="responses-table-wrap">
+        <table class="responses-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nombre</th>
+              <th>WhatsApp</th>
+              <th>Asistencia</th>
+              <th>+1</th>
+              <th>Acompañante</th>
+              <th>Bebidas</th>
+              <th>Restricciones</th>
+              <th>Notas</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody id="responsesBody">
+            <tr><td colspan="10" class="empty-state">Aún no hay respuestas</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB: WHATSAPP -->
+    <div class="tab-panel" id="tab-whatsapp">
+      <div class="wa-section" style="margin-bottom:2rem">
+        <h2>Enviar invitaciones</h2>
+        <p>Agrega los contactos y abre cada conversación en WhatsApp Web con el mensaje listo.</p>
+
+        <label class="form-label" style="display:block;margin-bottom:0.5rem">Agregar contacto</label>
+        <div style="display:flex;gap:0.75rem;margin-bottom:0.5rem;flex-wrap:wrap">
+          <input type="text" class="form-input" id="waName" placeholder="Nombre" style="flex:1;min-width:140px">
+          <input type="tel" class="form-input" id="waPhone" placeholder="+52 55 0000 0000" style="flex:1;min-width:160px">
+          <button onclick="addContact()" style="padding:1rem 1.5rem;background:transparent;border:1px solid rgba(201,185,154,0.3);color:var(--accent);font-family:'Jost',sans-serif;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:all 0.3s" onmouseover="this.style.background='rgba(201,185,154,0.08)'" onmouseout="this.style.background='transparent'">+ Agregar</button>
+        </div>
+        <p class="wa-hint">O pega una lista: una línea por persona con formato "Nombre, número"</p>
+        <textarea class="wa-contacts-area" id="waBulkInput" placeholder="Ana García, +52 55 1234 5678&#10;Carlos López, +52 33 8765 4321&#10;..."></textarea>
+        <p class="wa-hint">Formato: Nombre, teléfono (una persona por línea)</p>
+        <button onclick="bulkAddContacts()" style="margin-bottom:1.5rem;padding:0.7rem 1.5rem;background:transparent;border:1px solid rgba(201,185,154,0.2);color:var(--gray);font-family:'Jost',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:all 0.3s" onmouseover="this.style.background='rgba(201,185,154,0.05)'" onmouseout="this.style.background='transparent'">Importar lista</button>
+
+        <div class="wa-message-preview">
+          <strong>Vista previa del mensaje</strong>
+          <span id="waMessagePreview"></span>
+        </div>
+
+        <div id="waContactsList" class="wa-contacts-list"></div>
+
+        <div class="wa-actions">
+          <button onclick="sendNextWA()" class="wa-btn" id="waSendBtn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.99 2C6.473 2 2 6.473 2 11.99c0 1.89.518 3.662 1.42 5.184L2 22l4.945-1.397A9.932 9.932 0 0011.99 22c5.518 0 9.99-4.473 9.99-9.99C21.98 6.473 17.508 2 11.99 2z"/></svg>
+            Enviar siguiente
+          </button>
+          <span class="wa-counter" id="waCounter">0 contactos · 0 enviados</span>
+          <button onclick="resetWASent()" style="padding:0.5rem 1rem;background:transparent;border:1px solid rgba(255,80,80,0.15);color:#f08080;font-family:'Jost',sans-serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer">Reset enviados</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: CONFIGURACIÓN -->
+    <div class="tab-panel" id="tab-configuracion">
+      <div class="admin-note">
+        <strong style="color:var(--accent);display:block;margin-bottom:0.5rem;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase">Google Sheets — Guardar respuestas</strong>
+        Para conectar con Google Sheets sigue estos pasos:<br><br>
+        1. Crea una hoja de cálculo en <a href="https://sheets.google.com" target="_blank">Google Sheets</a><br>
+        2. Ve a <strong>Extensiones → Apps Script</strong><br>
+        3. Pega el script de abajo y haz clic en <strong>Implementar → Nueva implementación → Aplicación web</strong><br>
+        4. Copia la URL que te da y pégala aquí abajo<br>
+        5. Asegúrate de que el acceso sea: <strong>"Cualquier persona"</strong>
+      </div>
+
+      <div class="sheets-config">
+        <div>
+          <label class="form-label">URL de tu Apps Script (webhook)</label>
+          <input type="url" class="form-input" id="sheetsUrl" placeholder="https://script.google.com/macros/s/..." oninput="saveSheetsUrl()">
+          <p style="font-size:0.7rem;color:var(--gray);margin-top:0.5rem;letter-spacing:0.05em">Esta URL recibe los datos del formulario y los guarda en tu hoja.</p>
+        </div>
+
+        <div>
+          <label class="form-label">URL de la evite (para los mensajes de WhatsApp)</label>
+          <input type="url" class="form-input" id="eviteUrl" placeholder="https://tu-dominio.com/evite" oninput="saveEviteUrl()">
+        </div>
+
+        <button onclick="testSheets()" style="width:100%;padding:1rem;background:transparent;border:1px solid rgba(201,185,154,0.3);color:var(--accent);font-family:'Jost',sans-serif;font-size:0.75rem;letter-spacing:0.3em;text-transform:uppercase;cursor:pointer;transition:all 0.3s" onmouseover="this.style.background='rgba(201,185,154,0.08)'" onmouseout="this.style.background='transparent'">Probar conexión</button>
+
+        <div style="margin-top:2rem">
+          <label class="form-label">Script para Google Apps Script</label>
+          <div class="admin-note" style="font-family:monospace;font-size:0.72rem;line-height:1.8;white-space:pre-wrap;color:var(--cream)">function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet()
+              .getSheetByName("RSVP") || 
+              SpreadsheetApp.getActiveSpreadsheet()
+              .insertSheet("RSVP");
+  
+  // Headers (solo primera vez)
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow([
+      "Fecha", "Nombre", "WhatsApp",
+      "Asistencia", "+1", "Acompañante",
+      "Bebidas", "Restricciones", "Notas"
+    ]);
+  }
+  
+  var data = JSON.parse(e.postData.contents);
+  sheet.appendRow([
+    new Date(), data.nombre, data.telefono,
+    data.asistencia, data.masUno, data.nombreMasUno,
+    data.bebidas, data.restricciones, data.notas
+  ]);
+  
+  return ContentService
+    .createTextOutput(JSON.stringify({ok: true}))
+    .setMimeType(ContentService.MimeType.JSON);
+}</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /adminPage -->
+
+<!-- Fixed admin toggle -->
+<div class="nav-admin" id="adminToggleBtn">
+  <button class="nav-admin-btn" id="adminBtn" title="Panel de administración — o presiona Alt+A">⚙</button>
+</div>
+
+<script>
+// ── STORAGE HELPER (safe localStorage) ──
+const store = {
+  get: (k, def='') => { try { return localStorage.getItem(k) || def; } catch(e) { return def; } },
+  set: (k, v) => { try { localStorage.setItem(k, v); } catch(e) {} },
+  getJson: (k, def) => { try { return JSON.parse(localStorage.getItem(k)) || def; } catch(e) { return def; } }
+};
+
+// ── STATE ──
+let responses = store.getJson('bm_responses', []);
+let waContacts = store.getJson('bm_contacts', []);
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzX6Uog-4hToOmRq0UYCQUCNo_IjlCEvSBapP82bSd9IlwdvalcW1q3be4Fx9c7iAI1/exec';
+const EVITE_URL = 'https://bertha-y-miguel.netlify.app/';
+
+let sheetsUrl = store.get('bm_sheets_url', SHEETS_URL);
+let eviteUrl = store.get('bm_evite_url', EVITE_URL);
+let guestData = null;
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', () => {
+  // Config fields
+  const sheetsInput = document.getElementById('sheetsUrl');
+  const eviteInput = document.getElementById('eviteUrl');
+  if (sheetsInput) sheetsInput.value = sheetsUrl;
+  if (eviteInput) eviteInput.value = eviteUrl;
+
+  updateWAMessage();
+  renderContacts();
+  renderResponses();
+  updateWACounter();
+
+  // Auto-lookup via URL param
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('tel')) {
+      document.getElementById('telefono').value = params.get('tel');
+      lookupGuest();
+    }
+  } catch(e) {}
+
+  // Admin button
+  const btn = document.getElementById('adminBtn');
+  if (btn) btn.addEventListener('click', toggleAdmin);
+
+  // Keyboard shortcut Alt+A
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey && e.key === 'a') toggleAdmin();
+  });
+});
+
+// ── PHONE LOOKUP (JSONP para Apps Script) ──
+let allGuests = []; // cache de invitados para búsqueda parcial
+
+function onPhoneInput() {
+  const val = document.getElementById('telefono').value.trim().toLowerCase();
+  const box = document.getElementById('phoneSuggestions');
+  if (!val || val.length < 2) { box.style.display = 'none'; return; }
+
+  const matches = allGuests.filter(g => g.nombre.toLowerCase().includes(val));
+  if (matches.length === 0) { box.style.display = 'none'; return; }
+
+  box.style.display = 'block';
+  box.innerHTML = matches.map(g => `
+    <div onclick="selectGuest('${g.tel}', '${g.nombre.replace(/'/g,"\\'")}', ${g.tieneMasUno})"
+         style="padding:0.8rem 1rem;cursor:pointer;font-size:0.85rem;color:var(--cream);border-bottom:1px solid rgba(201,185,154,0.1);transition:background 0.2s"
+         onmouseover="this.style.background='rgba(201,185,154,0.08)'"
+         onmouseout="this.style.background='transparent'">
+      ${g.nombre}
+    </div>
+  `).join('');
+}
+
+function selectGuest(tel, nombre, tieneMasUno) {
+  document.getElementById('telefono').value = tel;
+  document.getElementById('phoneSuggestions').style.display = 'none';
+  showLookupResult(nombre, { nombre, tieneMasUno });
+}
+
+function lookupGuest() {
+  const query = document.getElementById('telefono').value.trim();
+  if (!query || query.length < 2) return;
+
+  document.getElementById('phoneSuggestions').style.display = 'none';
+  const url = store.get('bm_sheets_url', SHEETS_URL);
+
+  // Search locally if cached
+  if (allGuests.length > 0) {
+    const matches = allGuests.filter(g => g.nombre.toLowerCase().includes(query.toLowerCase()));
+    if (matches.length === 1) {
+      showLookupResult(matches[0].nombre, matches[0]);
+      return;
+    } else if (matches.length > 1) {
+      const box = document.getElementById('phoneSuggestions');
+      box.style.display = 'block';
+      box.innerHTML = '<div style="padding:0.6rem 1rem;font-size:0.65rem;color:var(--accent);letter-spacing:0.2em;text-transform:uppercase">Selecciona tu nombre</div>' +
+        matches.map(g => `
+          <div onclick="selectGuest('${g.tel}', '${g.nombre.replace(/'/g,"\\'")}', ${g.tieneMasUno})"
+               style="padding:0.8rem 1rem;cursor:pointer;font-size:0.85rem;color:var(--cream);border-bottom:1px solid rgba(201,185,154,0.1)"
+               onmouseover="this.style.background='rgba(201,185,154,0.08)'"
+               onmouseout="this.style.background='transparent'">
+            ${g.nombre}
+          </div>`).join('');
+      return;
+    }
+  }
+
+  // Load from Sheets via JSONP
+  document.getElementById('nombreLabel').textContent = 'Buscando...';
+  document.getElementById('nombreDisplay').style.display = 'block';
+
+  const callbackName = 'lookup_cb_' + Date.now();
+  const script = document.createElement('script');
+  const lookupUrl = url + '?action=lookup&nombre=' + encodeURIComponent(query) + '&callback=' + callbackName;
+
+  const timeout = setTimeout(() => {
+    document.getElementById('nombreLabel').textContent = 'Error de conexión — intenta de nuevo';
+    delete window[callbackName];
+    if (script.parentNode) script.parentNode.removeChild(script);
+  }, 8000);
+
+  window[callbackName] = function(data) {
+    clearTimeout(timeout);
+    delete window[callbackName];
+    if (script.parentNode) script.parentNode.removeChild(script);
+    if (data && data.nombre) {
+      showLookupResult(data.nombre, data);
+    } else if (data && data.matches) {
+      allGuests = data.matches;
+      onPhoneInput();
+      document.getElementById('nombreDisplay').style.display = 'none';
+    } else {
+      document.getElementById('nombreDisplay').style.display = 'none';
+      alert('No encontramos ese nombre.\nIntenta con el nombre exacto con el que te registramos.');
+    }
+  };
+
+  script.src = lookupUrl;
+  document.head.appendChild(script);
+}
+
+function showLookupResult(nombre, data) {
+  guestData = data;
+  document.getElementById('nombreDisplay').style.display = 'block';
+  document.getElementById('nombreLabel').textContent = nombre;
+  document.getElementById('mas-uno-group').style.display = data.tieneMasUno ? 'block' : 'none';
+  showFormFields(true);
+}
+
+function showFormFields(show) {
+  document.getElementById('asistencia-group').style.display = show ? 'block' : 'none';
+}
+
+// ── RESTRICCION MUTEX (Ninguna vs otros) ──
+function restriccionChange(checkbox) {
+  if (checkbox.id === 'rest-ninguna' && checkbox.checked) {
+    document.querySelectorAll('.rest-check').forEach(c => {
+      if (c.id !== 'rest-ninguna') {
+        c.checked = false;
+        // hide any open text fields
+        const txt = document.getElementById(c.id + '-txt');
+        if (txt) txt.style.display = 'none';
+      }
+    });
+  } else if (checkbox.id !== 'rest-ninguna' && checkbox.checked) {
+    document.getElementById('rest-ninguna').checked = false;
+  }
+}
+
+// ── TOGGLE ADMIN ──
+let adminVisible = false;
+let adminUnlocked = false;
+function toggleAdmin() {
+  if (!adminVisible && !adminUnlocked) {
+    const pwd = prompt('🔐 Contraseña de administración:');
+    if (pwd !== 'Tunaybertha33') {
+      if (pwd !== null) alert('Contraseña incorrecta');
+      return;
+    }
+    adminUnlocked = true;
+  }
+  adminVisible = !adminVisible;
+  const guest = document.getElementById('guestPage');
+  const admin = document.getElementById('adminPage');
+  guest.style.display = adminVisible ? 'none' : 'block';
+  admin.style.display = adminVisible ? 'block' : 'none';
+  if (adminVisible) renderResponses();
+}
+
+// ── TABS ──
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach((b,i) => {
+    b.classList.toggle('active', b.getAttribute('onclick').includes(name));
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => {
+    p.classList.toggle('active', p.id === 'tab-'+name);
+  });
+}
+
+// ── FORM LOGIC ──
+function selectToggle(btn, fieldId, value) {
+  btn.closest('.toggle-group').querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(fieldId).value = value;
+
+  if (fieldId === 'asistencia') {
+    const asiste = value === 'Sí';
+    if (guestData && guestData.tieneMasUno) {
+      document.getElementById('mas-uno-group').style.display = asiste ? 'block' : 'none';
+    }
+    document.getElementById('bebidas-group').style.display = asiste ? 'block' : 'none';
+    document.getElementById('restricciones-group').style.display = asiste ? 'block' : 'none';
+  }
+}
+
+function showMasUnoName(show) {
+  document.getElementById('masUnoName').classList.toggle('visible', show);
+}
+
+// ── SUBMIT RSVP ──
+async function submitRSVP() {
+  const nombre = guestData ? guestData.nombre : document.getElementById('telefono').value.trim();
+  const telefono = guestData ? (guestData.tel || '') : '';
+  const asistencia = document.getElementById('asistencia').value;
+
+  if (!nombre) { alert('Por favor ingresa tu nombre y búscate en la lista'); return; }
+  if (!asistencia) { alert('Por favor confirma si asistirás'); return; }
+
+  // Bebidas — collect checked boxes + optional "otro"
+  const bebSeleccionadas = [...document.querySelectorAll('.beb-check:checked')].map(c => c.value);
+  if (document.getElementById('beb-otro-check').checked) {
+    const otro = document.getElementById('beb-otro-txt').value.trim();
+    if (otro) bebSeleccionadas.push(otro);
+    else bebSeleccionadas.push('Otro');
+  }
+  const bebidas = bebSeleccionadas.filter(v => v !== 'Otro').join(', ') || '—';
+
+  if (asistencia === 'Sí' && bebSeleccionadas.length === 0) {
+    alert('Por favor selecciona al menos una bebida'); return;
+  }
+
+  // Restricciones — collect checked boxes + optional alergia texts
+  const restSeleccionadas = [...document.querySelectorAll('.rest-check:checked')].map(c => {
+    if (c.id === 'rest-alergia-yo') {
+      const txt = document.getElementById('rest-alergia-yo-txt').value.trim();
+      return txt ? 'Tengo alergia: ' + txt : 'Tengo alergia';
+    }
+    if (c.id === 'rest-alergia-pareja') {
+      const txt = document.getElementById('rest-alergia-pareja-txt').value.trim();
+      return txt ? 'Pareja alergia: ' + txt : 'Pareja tiene alergia';
+    }
+    return c.value;
+  });
+  const restricciones = restSeleccionadas.join(', ') || '—';
+
+  if (asistencia === 'Sí' && restSeleccionadas.length === 0) {
+    alert('Por favor indica si tienes restricciones alimentarias'); return;
+  }
+
+  const entry = {
+    id: Date.now(),
+    fecha: new Date().toLocaleString('es-MX'),
+    nombre,
+    telefono,
+    asistencia,
+    masUno: document.getElementById('masUno').value || '—',
+    nombreMasUno: document.getElementById('nombreMasUno').value.trim() || '—',
+    bebidas,
+    restricciones,
+    notas: '—'
+  };
+
+  // Save locally
+  responses.push(entry);
+  store.set('bm_responses', JSON.stringify(responses));
+
+  // Send to Google Sheets via JSONP (avoids CORS)
+  const url = store.get('bm_sheets_url', SHEETS_URL);
+  if (url) {
+    const callbackName = 'save_cb_' + Date.now();
+    const script = document.createElement('script');
+    const params = encodeURIComponent(JSON.stringify(entry));
+    script.src = url + '?action=save&data=' + params + '&callback=' + callbackName;
+    window[callbackName] = function(res) {
+      delete window[callbackName];
+      if (script.parentNode) script.parentNode.removeChild(script);
+      console.log('Sheets save:', res);
+    };
+    document.head.appendChild(script);
+  }
+
+  document.getElementById('rsvpForm').style.display = 'none';
+  const msg = document.getElementById('successMsg');
+  msg.classList.add('visible');
+  if (asistencia === 'No') {
+    document.getElementById('successText').textContent = 'Lástima que no puedas acompañarnos, ¡pero te llevaremos en el corazón! 💛';
+  }
+}
+
+// ── RENDER RESPONSES ──
+function renderResponses() {
+  const body = document.getElementById('responsesBody');
+  const total = responses.length;
+  const si = responses.filter(r => r.asistencia === 'Sí').length;
+  const no = total - si;
+
+  document.getElementById('totalCount').textContent = total;
+  document.getElementById('siCount').textContent = si;
+  document.getElementById('noCount').textContent = no;
+
+  if (total === 0) {
+    body.innerHTML = '<tr><td colspan="10" class="empty-state">Aún no hay respuestas</td></tr>';
+    return;
+  }
+
+  body.innerHTML = responses.map((r, i) => `
+    <tr>
+      <td style="color:var(--gray)">${i+1}</td>
+      <td><strong>${r.nombre}</strong></td>
+      <td>${r.telefono}</td>
+      <td><span class="badge ${r.asistencia==='Sí'?'badge-yes':'badge-no'}">${r.asistencia}</span></td>
+      <td>${r.masUno}</td>
+      <td>${r.nombreMasUno}</td>
+      <td>${r.bebidas}</td>
+      <td>${r.restricciones}</td>
+      <td>${r.notas}</td>
+      <td style="color:var(--gray);font-size:0.7rem">${r.fecha}</td>
+    </tr>
+  `).join('');
+}
+
+function clearResponses() {
+  if (confirm('¿Borrar todas las respuestas locales?')) {
+    responses = [];
+    store.set('bm_responses', '[]');
+    renderResponses();
+  }
+}
+
+function exportCSV() {
+  if (responses.length === 0) { alert('No hay respuestas para exportar'); return; }
+  const headers = ['Fecha','Nombre','WhatsApp','Asistencia','+1','Acompañante','Bebidas','Restricciones','Notas'];
+  const rows = responses.map(r => [r.fecha,r.nombre,r.telefono,r.asistencia,r.masUno,r.nombreMasUno,r.bebidas,r.restricciones,r.notas]);
+  const csv = [headers, ...rows].map(r => r.map(v => `"${v}"`).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'rsvp-bertha-miguel.csv';
+  a.click();
+}
+
+// ── WHATSAPP ──
+function getEviteUrl() {
+  return store.get('bm_evite_url', EVITE_URL) || window.location.href;
+}
+
+function buildMessage(name) {
+  return `¡Hola ${name}! 🏃‍♀️🚴‍♂️\n\nBertha y Miguel tienen el gusto de invitarte a celebrar su boda el *10 de octubre de 2026* en el Jardín "El Encanto", Cuernavaca, Morelos.\n\nConfirma tu asistencia en el siguiente enlace:\n${getEviteUrl()}\n\n¡Esperamos verte ahí! 🎉`;
+}
+
+function updateWAMessage() {
+  document.getElementById('waMessagePreview').textContent = buildMessage('{{nombre}}');
+}
+
+function addContact() {
+  const name = document.getElementById('waName').value.trim();
+  const phone = document.getElementById('waPhone').value.trim().replace(/\s+/g, '');
+  if (!name || !phone) { alert('Ingresa nombre y teléfono'); return; }
+  waContacts.push({ name, phone, sent: false });
+  store.set('bm_contacts', JSON.stringify(waContacts));
+  document.getElementById('waName').value = '';
+  document.getElementById('waPhone').value = '';
+  renderContacts();
+}
+
+function bulkAddContacts() {
+  const lines = document.getElementById('waBulkInput').value.trim().split('\n');
+  let added = 0;
+  lines.forEach(line => {
+    const parts = line.split(',');
+    if (parts.length >= 2) {
+      const name = parts[0].trim();
+      const phone = parts.slice(1).join(',').trim().replace(/\s+/g, '');
+      if (name && phone) { waContacts.push({ name, phone, sent: false }); added++; }
+    }
+  });
+  if (added > 0) {
+    store.set('bm_contacts', JSON.stringify(waContacts));
+    document.getElementById('waBulkInput').value = '';
+    renderContacts();
+    alert(`${added} contacto(s) agregado(s)`);
+  } else {
+    alert('No se encontraron contactos válidos. Usa el formato: Nombre, teléfono');
+  }
+}
+
+function removeContact(i) {
+  waContacts.splice(i, 1);
+  store.set('bm_contacts', JSON.stringify(waContacts));
+  renderContacts();
+}
+
+function renderContacts() {
+  const list = document.getElementById('waContactsList');
+  if (!list) return;
+  if (waContacts.length === 0) {
+    list.innerHTML = '<span style="font-size:0.75rem;color:var(--gray);letter-spacing:0.1em">Sin contactos aún</span>';
+  } else {
+    list.innerHTML = waContacts.map((c,i) => `
+      <div class="wa-tag" style="${c.sent ? 'opacity:0.4;' : ''}">
+        ${c.sent ? '✓ ' : ''}${c.name}
+        <span class="wa-tag-remove" onclick="removeContact(${i})">×</span>
+      </div>
+    `).join('');
+  }
+  updateWACounter();
+}
+
+function updateWACounter() {
+  const el = document.getElementById('waCounter');
+  if (!el) return;
+  const sent = waContacts.filter(c => c.sent).length;
+  el.textContent = `${waContacts.length} contactos · ${sent} enviados`;
+}
+
+function sendNextWA() {
+  const next = waContacts.find(c => !c.sent);
+  if (!next) { alert('¡Todos los mensajes han sido enviados! 🎉'); return; }
+
+  const message = buildMessage(next.name);
+  const phone = next.phone.replace('+', '');
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+
+  next.sent = true;
+  store.set('bm_contacts', JSON.stringify(waContacts));
+  renderContacts();
+}
+
+function resetWASent() {
+  waContacts.forEach(c => c.sent = false);
+  store.set('bm_contacts', JSON.stringify(waContacts));
+  renderContacts();
+}
+
+// ── CONFIG ──
+function saveSheetsUrl() {
+  sheetsUrl = document.getElementById('sheetsUrl').value;
+  store.set('bm_sheets_url', sheetsUrl);
+}
+
+function saveEviteUrl() {
+  eviteUrl = document.getElementById('eviteUrl').value;
+  store.set('bm_evite_url', eviteUrl);
+  updateWAMessage();
+}
+
+async function testSheets() {
+  const url = document.getElementById('sheetsUrl').value;
+  if (!url) { alert('Ingresa la URL del Apps Script primero'); return; }
+  try {
+    await fetch(url, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre: 'TEST', telefono: '000', asistencia: 'TEST', masUno: '—', nombreMasUno: '—', bebidas: '—', restricciones: '—', notas: 'Test de conexión', fecha: new Date().toLocaleString('es-MX') })
+    });
+    alert('✓ Solicitud enviada. Verifica tu Google Sheet para confirmar que recibió el registro de prueba.');
+  } catch(e) {
+    alert('Error al conectar. Verifica la URL e intenta de nuevo.');
+  }
+}
+</script>
+</body>
+</html>
