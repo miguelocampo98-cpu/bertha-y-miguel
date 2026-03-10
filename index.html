@@ -1063,8 +1063,8 @@
 
       <!-- Correo -->
       <div class="form-group" id="correo-group" style="display:none">
-        <label class="form-label">Tu correo electrónico</label>
-        <input type="email" class="form-input" id="correoInput" placeholder="nombre@correo.com">
+        <label class="form-label">Tu correo electrónico *</label>
+        <input type="email" class="form-input" id="correoInput" placeholder="nombre@correo.com" required>
         <p style="font-size:0.7rem;color:var(--gray);margin-top:0.4rem;letter-spacing:0.04em">Te enviaremos una confirmación con todos los detalles de la boda.</p>
       </div>
 
@@ -1338,7 +1338,7 @@ const store = {
 // ── STATE ──
 let responses = store.getJson('bm_responses', []);
 let waContacts = store.getJson('bm_contacts', []);
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbySB2QY21PlWInVH4_M3wotvBnerc8KZAxDsZyAi8tfT0duqzExNvJ01bQqrkpK-yw4/exec';
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycby0cG9YVQcNLR_ZldmFkNFH1ssZtn_oh0LyVlFDs77pdFokrtm_sCVbNwzyuHTHVhLB/exec';
 const EVITE_URL = 'https://bertha-y-miguel.netlify.app/';
 
 let sheetsUrl = store.get('bm_sheets_url', SHEETS_URL);
@@ -1587,6 +1587,7 @@ async function submitRSVP() {
   }
 
   const correo = document.getElementById('correoInput').value.trim();
+  if (!correo || !correo.includes('@')) { alert('Por favor ingresa tu correo electrónico para enviarte la confirmación'); return; }
 
   const entry = {
     id: Date.now(),
