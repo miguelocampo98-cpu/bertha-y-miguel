@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bertha & Miguel — 10.10.2026</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0a'/%3E%3Ctext x='50' y='62' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='36' fill='%23c9b99a'%3EB%26M%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Dancing+Script:wght@400;600&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -1013,6 +1014,7 @@
           <span style="font-style:italic;color:var(--accent);display:block;margin-bottom:1rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem">"Garden Formal"</span>
           <span style="color:var(--accent);font-family:'Jost',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;display:block;margin-bottom:0.4rem">Hombres</span>
           Traje ligero (lino, algodón o mezclas de verano), camisa de vestir y zapatos de piel. Corbata opcional.
+          <small style="color:var(--gray);margin-top:0.4rem;display:block">Evitar traje negro y guayaberas.</small>
         </p>
         <p style="font-size:1rem;line-height:1.8;margin-top:1.2rem">
           <span style="color:var(--accent);font-family:'Jost',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;display:block;margin-bottom:0.4rem">Mujeres</span>
@@ -1421,7 +1423,7 @@ const store = {
 // ── STATE ──
 let responses = store.getJson('bm_responses', []);
 let waContacts = store.getJson('bm_contacts', []);
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbysAVvTZrwpntVrkqMu__Xf-JqdesM504XLtLdNNWJxLqGxKDT8FUWJItPRs_k6um6Y/exec';
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx2jQW1IoZXdEbRer4SADJ4f86UvCpbvtdVvyH4B4gMi3mF6DkztGsxDlLmVLDg4ey1/exec';
 const EVITE_URL = 'https://bertha-y-miguel.netlify.app/';
 
 let sheetsUrl = store.get('bm_sheets_url', SHEETS_URL);
