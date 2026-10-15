@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bertha & Miguel — 10.10.2026</title>
+<title>Bertha & Miguel — 10.04.2027</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💍</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Dancing+Script:wght@400;600&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
@@ -117,7 +117,7 @@
     position: relative;
     z-index: 2;
     text-align: center;
-    padding: 2rem;
+    padding: 2rem 2rem 5rem;
     animation: fadeUp 1.4s ease both;
   }
 
@@ -177,7 +177,7 @@
 
   .scroll-hint {
     position: absolute;
-    bottom: 6%;
+    bottom: 4%;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -187,6 +187,11 @@
     opacity: 0;
     animation: fadeUp 1s ease 1.6s both;
     cursor: pointer;
+    z-index: 3;
+  }
+
+  @media (max-height: 700px), (max-width: 480px) {
+    .scroll-hint { display: none; }
   }
 
   .scroll-hint span {
@@ -921,9 +926,86 @@
     .tabs { overflow-x: auto; }
     .tab-btn { padding: 0.75rem 1.25rem; font-size: 0.65rem; }
   }
+
+  /* ── NAV HEADER ── */
+  .site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 150;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem;
+    height: 52px;
+    background: rgba(10,10,10,0);
+    transition: background 0.4s ease, border-color 0.4s ease;
+    pointer-events: none;
+  }
+
+  .site-nav.scrolled {
+    background: rgba(10,10,10,0.92);
+    border-bottom: 1px solid rgba(201,185,154,0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    pointer-events: all;
+  }
+
+  .site-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-nav ul li a {
+    display: block;
+    padding: 0.4rem 1rem;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+
+  .site-nav ul li a:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 600px) {
+    .site-nav ul li a {
+      padding: 0.4rem 0.6rem;
+      font-size: 0.5rem;
+      letter-spacing: 0.15em;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .site-nav ul li a {
+      padding: 0.4rem 0.35rem;
+      font-size: 0.45rem;
+      letter-spacing: 0.08em;
+    }
+  }
 </style>
 </head>
 <body>
+
+<!-- NAVIGATION HEADER -->
+<nav class="site-nav" id="siteNav">
+  <ul>
+    <li><a href="#details">La Celebración</a></li>
+    <li><a href="#rsvp">Confirmación</a></li>
+    <li><a href="https://regalos-bertha-y-miguel.netlify.app/" target="_blank">Mesa de Regalos</a></li>
+    <li><a href="#logistica">Información Práctica</a></li>
+  </ul>
+</nav>
 
 <!-- GUEST PAGE -->
 <div id="guestPage" class="page active">
@@ -978,7 +1060,7 @@
         <span class="hero-ampersand">&amp;</span>
         Miguel
       </h1>
-      <p class="hero-date">10 · 10 · 2026</p>
+      <p class="hero-date">10 · 04 · 2027</p>
       <p class="hero-location">Cuernavaca, Morelos, México</p>
     </div>
 
@@ -994,7 +1076,7 @@
     <div class="details-grid">
       <div class="detail-item">
         <h3>Fecha</h3>
-        <p>Sábado 10 de octubre de 2026</p>
+        <p>Sábado 10 de abril de 2027</p>
       </div>
       <div class="detail-item">
         <h3>Lugar</h3>
@@ -1052,7 +1134,7 @@
   <section class="rsvp-section" id="rsvp">
     <div class="section-label">Confirmación</div>
     <h2 class="rsvp-title">RSVP</h2>
-    <p class="rsvp-subtitle">Por favor confírmanos tu asistencia antes del 1 de septiembre de 2026</p>
+    <p class="rsvp-subtitle">Por favor confírmanos tu asistencia antes del 1 de marzo de 2027</p>
 
     <div id="rsvpForm">
       <!-- Identificación por nombre -->
@@ -1309,7 +1391,7 @@
   </section>
 
   <footer>
-    <p>Bertha &amp; Miguel — 10.10.2026</p>
+    <p>Bertha &amp; Miguel — 10.04.2027</p>
     <p style="font-size:0.7rem;letter-spacing:0.2em;color:var(--gray);margin-top:0.5rem;font-family:'Jost',sans-serif;font-weight:200">🏃🏻‍♀️ &nbsp;·&nbsp; 🚴🏻‍♂️</p>
   </footer>
 
@@ -1323,7 +1405,7 @@
     <div style="margin-bottom:3rem">
       <p style="font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem">Panel de administración</p>
       <h1 style="font-family:'Dancing Script',cursive;font-size:2.5rem">Bertha &amp; Miguel</h1>
-      <p style="font-size:0.8rem;color:var(--gray);margin-top:0.3rem">Gestión de invitados · 10.10.2026</p>
+      <p style="font-size:0.8rem;color:var(--gray);margin-top:0.3rem">Gestión de invitados · 10.04.2027</p>
     </div>
 
     <div class="tabs">
@@ -1865,7 +1947,7 @@ function getEviteUrl() {
 }
 
 function buildMessage(name) {
-  return `¡Hola ${name}! 🏃‍♀️🚴‍♂️\n\nBertha y Miguel tienen el gusto de invitarte a celebrar su boda el *10 de octubre de 2026* en el Jardín "El Encanto", Cuernavaca, Morelos.\n\nConfirma tu asistencia en el siguiente enlace:\n${getEviteUrl()}\n\n¡Esperamos verte ahí! 🎉`;
+  return `¡Hola ${name}! 🏃‍♀️🚴‍♂️\n\nBertha y Miguel tienen el gusto de invitarte a celebrar su boda el *10 de abril de 2027* en el Jardín "El Encanto", Cuernavaca, Morelos.\n\nConfirma tu asistencia en el siguiente enlace:\n${getEviteUrl()}\n\n¡Esperamos verte ahí! 🎉`;
 }
 
 function updateWAMessage() {
@@ -1964,6 +2046,21 @@ function saveEviteUrl() {
   store.set('bm_evite_url', eviteUrl);
   updateWAMessage();
 }
+
+// ── NAV SCROLL BEHAVIOR ──
+(function() {
+  var nav = document.getElementById('siteNav');
+  if (!nav) return;
+  function onScroll() {
+    if (window.scrollY > 60) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
 
 async function testSheets() {
   const url = document.getElementById('sheetsUrl').value;
