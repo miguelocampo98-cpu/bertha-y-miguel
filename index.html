@@ -20,6 +20,10 @@
 
   html { scroll-behavior: smooth; }
 
+  /* Letra más grande en computador (todo el sitio usa rem) */
+  @media (min-width: 900px) { html { font-size: 18px; } }
+  @media (min-width: 1400px) { html { font-size: 19px; } }
+
   body {
     background: var(--black);
     color: var(--white);
@@ -31,12 +35,12 @@
   /* ── HERO ── */
   .hero {
     position: relative;
-    height: 100vh;
-    min-height: 600px;
+    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     overflow: hidden;
   }
 
@@ -117,7 +121,9 @@
     position: relative;
     z-index: 2;
     text-align: center;
-    padding: 2rem 2rem 5rem;
+    /* margen automático: centra el contenido y deja espacio fijo para "Ver detalles" debajo */
+    margin: auto 0;
+    padding: 5rem 2rem 2rem;
     animation: fadeUp 1.4s ease both;
   }
 
@@ -176,10 +182,9 @@
   }
 
   .scroll-hint {
-    position: absolute;
-    bottom: 4%;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
+    margin-bottom: 1.5rem;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -190,7 +195,7 @@
     z-index: 3;
   }
 
-  @media (max-height: 700px), (max-width: 480px) {
+  @media (max-width: 480px) {
     .scroll-hint { display: none; }
   }
 
@@ -211,7 +216,7 @@
   /* ── DETAILS SECTION ── */
   .section {
     padding: 6rem 2rem;
-    max-width: 700px;
+    max-width: 44rem;
     margin: 0 auto;
   }
 
@@ -1103,7 +1108,6 @@
     height: 52px;
     background: rgba(10,10,10,0);
     transition: background 0.4s ease, border-color 0.4s ease;
-    pointer-events: none;
   }
 
   .site-nav.scrolled {
@@ -1111,7 +1115,6 @@
     border-bottom: 1px solid rgba(201,185,154,0.12);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    pointer-events: all;
   }
 
   .site-nav ul {
