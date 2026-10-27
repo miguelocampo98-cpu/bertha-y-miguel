@@ -21,8 +21,8 @@
   html { scroll-behavior: smooth; }
 
   /* Letra más grande en computador (todo el sitio usa rem) */
-  @media (min-width: 900px) { html { font-size: 18px; } }
-  @media (min-width: 1400px) { html { font-size: 19px; } }
+  @media (min-width: 900px) { html { font-size: 20px; } }
+  @media (min-width: 1400px) { html { font-size: 21px; } }
 
   body {
     background: var(--black);
@@ -932,7 +932,19 @@
     .tab-btn { padding: 0.75rem 1.25rem; font-size: 0.65rem; }
   }
 
-  /* ── POOL AFTERNOON ── */
+  .garden-note {
+    margin-top: 1.6rem;
+    padding: 1rem 1.2rem;
+    border-left: 2px solid var(--accent);
+    background: rgba(201,185,154,0.06);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem !important;
+    line-height: 1.6 !important;
+    color: var(--cream) !important;
+  }
+  .garden-note strong { color: var(--white); font-weight: 400; font-size: 1.2rem; }
+
+  /* ── TARDE DE ALBERCA ── */
   .wedding-card {
     border: 1px solid rgba(201,185,154,0.45);
     background: linear-gradient(180deg, rgba(201,185,154,0.07), rgba(201,185,154,0.02));
@@ -1267,19 +1279,20 @@
           <span style="color:var(--accent);font-family:'Jost',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;display:block;margin-bottom:0.4rem">Mujeres</span>
           Vestido tipo cóctel, midi o largo en telas ligeras.
         </p>
-        <p style="font-size:0.8rem;color:var(--gray);margin-top:1rem;font-style:italic">La ceremonia y recepción serán en jardín.</p>
+        <p class="garden-note"><strong>La ceremonia y recepción serán en jardín.</strong></p>
       </div>
     </div>
     </div>
 
     <div class="event-card">
       <div class="event-when">Un día antes &nbsp;·&nbsp; Viernes 9 de abril &nbsp;·&nbsp; 4:00 – 8:00 pm</div>
-      <h3>Pool Afternoon</h3>
-      <p>Los esperamos en el jardín para convivir en la alberca. Trae tu traje de baño — nosotros ponemos la pizza.</p>
+      <h3>Tarde de Alberca</h3>
+      <p>Los esperamos en el jardín para convivir en la alberca. Trae tu traje de baño — nosotros ponemos la pizza y las bebidas.</p>
       <div class="event-tags">
         <span>Traje de baño</span>
         <span>Alberca</span>
         <span>Pizza</span>
+        <span>Bebidas</span>
       </div>
     </div>
   </section>
@@ -1468,7 +1481,7 @@
         <h3 class="info-h3">Cómo llegar</h3>
 
         <div class="tip-box">
-          <strong>Si vienes de fuera de México:</strong> te recomendamos aterrizar en Ciudad de México el <strong>viernes 9 de abril al mediodía o antes</strong> y salir directo a Cuernavaca. Así llegas antes de las 4:00 pm para el Pool Afternoon. El trayecto desde el aeropuerto toma entre 1.5 y 2 horas, según el tráfico.
+          <strong>Si vienes de fuera de México:</strong> te recomendamos aterrizar en Ciudad de México el <strong>viernes 9 de abril al mediodía o antes</strong> y salir directo a Cuernavaca. Así llegas antes de las 4:00 pm para la Tarde de Alberca. El trayecto desde el aeropuerto toma entre 1.5 y 2 horas, según el tráfico.
         </div>
 
         <!-- Bus desde AICM -->
@@ -1495,7 +1508,7 @@
           <ul class="route-facts">
             <li><strong>Pullman Express</strong>, directo a la terminal <strong>Cuernavaca Casino</strong>.</li>
             <li>Solo hay <strong>5 salidas al día</strong>: 10:30 am, 12:30 pm, 2:30 pm, 5:30 pm y 6:30 pm. Toma entre 2 y 3 horas, según el tráfico.</li>
-            <li>Para llegar al Pool Afternoon, toma el de <strong>10:30 am o 12:30 pm</strong>. Te recomendamos comprar tu boleto con anticipación.</li>
+            <li>Para llegar a la Tarde de Alberca, toma el de <strong>10:30 am o 12:30 pm</strong>. Te recomendamos comprar tu boleto con anticipación.</li>
           </ul>
           <a class="route-link" href="https://pullman.mx/" target="_blank">Comprar en pullman.mx →</a>
         </div>
@@ -1586,7 +1599,7 @@
           <!-- La Casas B+B -->
           <div style="border:1px solid rgba(201,185,154,0.12);padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem">
             <div>
-              <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--white);margin-bottom:0.2rem">La Casas B+B</p>
+              <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--white);margin-bottom:0.2rem">Las Casas B+B</p>
               <p style="font-size:0.65rem;color:var(--accent);letter-spacing:0.1em">★★★★ &nbsp;·&nbsp; 3.5 km · 13 min</p>
             </div>
             <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
