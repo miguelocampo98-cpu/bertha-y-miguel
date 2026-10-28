@@ -2182,7 +2182,8 @@ function getEviteUrl() {
 }
 
 function buildMessage(name) {
-  return `¡Hola ${name}! 🎊\n\nBertha y Miguel tienen el gusto de invitarte a celebrar su boda el *10 de abril de 2027* en el Jardín "El Encanto", Cuernavaca, Morelos.\n\nConfirma tu asistencia en el siguiente enlace:\n${getEviteUrl()}\n\n¡Esperamos verte ahí! 💛`;
+  // Solo emojis de 3 bytes (✨ ❤️): los de 4 bytes (🎊 💛) llegan como "?" desde links de WhatsApp
+  return `¡Hola ${name}! ✨\n\nBertha y Miguel tienen el gusto de invitarte a celebrar su boda el *10 de abril de 2027* en el Jardín "El Encanto", Cuernavaca, Morelos.\n\nConfirma tu asistencia en el siguiente enlace:\n${getEviteUrl()}\n\n¡Esperamos verte ahí! ❤️`;
 }
 
 function updateWAMessage() {
@@ -2256,7 +2257,7 @@ function sendNextWA() {
 
   const message = buildMessage(next.name);
   const phone = next.phone.replace('+', '');
-  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
   window.open(url, '_blank');
 
   next.sent = true;
