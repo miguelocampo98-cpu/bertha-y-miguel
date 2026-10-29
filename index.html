@@ -2185,8 +2185,9 @@ function getEviteUrl() {
 }
 
 function buildMessage(name) {
-  // OJO: 🤵🏼👰🏼🐈🐕👶🏻 son emojis de 4 bytes; con wa.me llegaban como "?". Probar con api.whatsapp.com antes de envío masivo.
-  return `¡Hola ${name}!\n\nBertha y Miguel tienen el gusto de invitarte a celebrar su boda el *10 de abril de 2027* en el Jardín "El Encanto", Cuernavaca, Morelos.\n\nConfirma tu asistencia en el siguiente enlace:\n${getEviteUrl()}\n\n¡Los esperamos! 🤵🏼👰🏼🐈🐕👶🏻\n#AhoraSiEsEnSerio`;
+  // Los emojis funcionan con api.whatsapp.com (con wa.me llegaban como "?")
+  // 🤵🏻‍♂️ = U+1F935 U+1F3FB ZWJ U+2642 U+FE0F · 👰🏻‍♀️ = U+1F470 U+1F3FB ZWJ U+2640 U+FE0F
+  return `¡Hola ${name}!\n\nBertha y Miguel tienen el gusto de invitarte a celebrar su boda el *10 de abril de 2027* en el Jardín "El Encanto", Cuernavaca, Morelos.\n\nConfirma tu asistencia en el siguiente enlace:\n${getEviteUrl()}\n\n¡Los esperamos! \u{1F935}\u{1F3FB}‍♂️\u{1F470}\u{1F3FB}‍♀️\u{1F408}\u{1F415}\u{1F476}\u{1F3FB}\n#AhoraSiEsEnSerio`;
 }
 
 function updateWAMessage() {
